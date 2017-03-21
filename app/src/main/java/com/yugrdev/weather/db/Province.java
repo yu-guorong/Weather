@@ -1,5 +1,7 @@
 package com.yugrdev.weather.db;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by yuygu on 2017/1/18.
  */
