@@ -78,15 +78,12 @@ public class ChooseAreaFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (currentLevel == LEVEL_PROVINCE) {
-                    Log.e("tag", "LEVEL_PROVINCE");
                     selectedProvince = provinceList.get(position);
                     queryCities();
                 } else if (currentLevel == LEVEL_CITY) {
-                    Log.e("tag", "LEVEL_CITY");
                     selectedCity = cityList.get(position);
                     queryCounties();
                 } else if (currentLevel == LEVEL_COUNTY) {
-                    Log.e("tag", "LEVEL_COUNTY");
                     String weatherId = countyList.get(position).getWeatherId();
                     Intent intent = new Intent(getActivity(), WeatherActivity.class);
                     intent.putExtra("weather_id", weatherId);
@@ -109,7 +106,6 @@ public class ChooseAreaFragment extends Fragment {
     }
 
     private void queryProvinces() {
-        Log.e("tag", "queryProvinces");
         titleText.setText("中国");
         backButton.setVisibility(View.GONE);
         provinceList = DataSupport.findAll(Province.class);
@@ -128,7 +124,6 @@ public class ChooseAreaFragment extends Fragment {
     }
 
     private void queryCounties() {
-        Log.e("tag", "queryCounties");
         titleText.setText(selectedCity.getCityName());
         backButton.setVisibility(View.VISIBLE);
         countyList = DataSupport.where("cityid = ?", String.valueOf(selectedCity.getId())).find(County.class);
@@ -149,7 +144,6 @@ public class ChooseAreaFragment extends Fragment {
     }
 
     private void queryCities() {
-        Log.e("tag", "queryCities");
         titleText.setText(selectedProvince.getProvinceName());
         backButton.setVisibility(View.VISIBLE);
         cityList = DataSupport.where("provinceid = ?", String.valueOf(selectedProvince.getId())).find(City.class);
@@ -171,9 +165,7 @@ public class ChooseAreaFragment extends Fragment {
     }
 
     private void queryFromServer(String address, final String type) {
-        Log.e("tag", "queryFromServer");
                 shwoProfressDialog();
-        Log.e("tag", "queryFromServer  --after");
 
         HttpUtil.sentOkHttpRequest(address, new Callback() {
             @Override
